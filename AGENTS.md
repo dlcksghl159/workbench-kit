@@ -50,6 +50,7 @@ Without multi-agent support, the human runs the role in a second terminal (`.kit
 - No secrets in code or logs. If the app needs an API key, read it from an environment variable the platform provides (ask the human first); never hardcode or print it. Validate inputs at boundaries; no silent `except`.
 - Don't dump large files or datasets; use head/wc/rg or `python3 .kit/tools/profile.py`.
 - Stay within the agreed scope. Don't edit `.kit/` (except `.kit/runtime/`).
+- Prefer the simplest design that meets the agreed requirements. Defensive layers, abstractions, or validation beyond what an R-id needs require a recorded reason; evaluators have called out over-engineering. Record extra risks as known limitations instead.
 - The task README and the task's own rules override this file; its deliverable format overrides our templates.
 - If a slice exceeds ~30 min or 3 failed attempts, stop and propose a smaller scope.
 <!-- workbench:end -->

@@ -7,6 +7,7 @@ description: "After requirements are confirmed: write process/specs/S<n>-<name>.
 
 ## Plan (once, after the human confirms REQUIREMENTS)
 - Order slices Must-first. Slice 1 must run end to end (input → processing → output), even if thin.
+- Each slice covers one user action and one success criterion. After its automated checks pass, have the human try it in the real interface (built-in browser or the output file) before starting the next slice.
 - Each slice is about 30 minutes of work or less and touches few files. Write the plan under "작업 계획" in process/NOTES.md with the R-ids each slice covers.
 - Pre-mortem: list the 3-5 most likely ways the final result could be wrong. Each one becomes a check in some slice.
 - Show the plan to the human before starting slice 1.

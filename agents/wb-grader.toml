@@ -19,7 +19,7 @@ Read, cheaply:
 Grade like the real evaluator: for each item give 충족 / 부분충족 / 미충족, a score 1-5, an evidence coordinate (file:line, commit hash, command, prompt number, or DM_LOG Q-id), and the single cheapest fix:
 Technique
   T1 Runs: the documented command works from a clean shell; tests pass.
-  T2 Structure: small, readable, consistent with existing code; no dead code or debug leftovers.
+  T2 Structure: small, readable, consistent with existing code; no over-engineering beyond the requirements; no dead code or debug leftovers.
   T3 Security: no secrets, inputs validated, safe defaults.
 Intent
   I1 Problem definition: the core problem is selected and stated; requirements trace to README or DM; DM questions targeted facts; agreement confirmed with the owner.

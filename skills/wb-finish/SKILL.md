@@ -6,7 +6,7 @@ description: "Last 30-40 min before submitting: reviewer pass, fixes, audit, REP
 # Finish: review → fix → audit → report → drill
 
 1. Freeze scope. No new features; only fixes for Must requirements, correctness, and security.
-2. Spawn `wb-reviewer`: "Review the current work against process/REQUIREMENTS.md." Show the human the ranked findings; the human picks what to fix. Record the choice and its reasons in NOTES (as a changed judgment if it reverses a decision).
+2. Spawn `wb-reviewer`: "Review the current work against process/REQUIREMENTS.md." Show the human the ranked findings; the human picks what to fix. Fix findings that affect Must requirements, correctness on realistic inputs, or security; for the rest, prefer recording a known limitation over adding defensive complexity. Record the choice and its reasons in NOTES (as a changed judgment if it reverses a decision).
 3. Fix with small specs (`wb-slice`) or direct edits for one-liners, then rerun the `wb-verify` rungs that apply.
 4. Run `python3 .kit/tools/audit.py --run-tests`. Resolve every FAIL. Explain any WARN you keep in the report.
 5. Write process/REPORT.md from `.kit/templates/REPORT.md`, in Korean, concise:
