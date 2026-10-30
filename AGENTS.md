@@ -1,7 +1,7 @@
 <!-- workbench:begin -->
 # Task harness — timed, graded build
 
-Timed (180 min), graded task. Graders read the DM log, prompts, tool config, commands run, the working-tree diff, process docs, and the human's later answers (typed without AI). Win by solving the right problem, shipping verified working output, and leaving a record a reviewer can follow. Respond in Korean, concisely.
+Timed (180 min), graded task. Graders read the DM log, prompts, tool config, terminal sessions, git log and diff, test runs, process docs, and the human's later answers (typed without AI). Token usage is tracked. Win by solving the right problem, shipping verified working output, and leaving a record a reviewer can follow. Respond in Korean, concisely.
 
 ## Roles
 - The human leads: problem definition, priorities, trade-offs, acceptance. When a choice changes scope, behavior, or an interface, stop and give 2-3 options with a recommendation. Do not decide silently.
@@ -38,12 +38,13 @@ Without multi-agent support, the human runs the role in a second terminal (`.kit
 
 ## Hard rules
 - Web servers bind 0.0.0.0; the built-in browser preview cannot reach localhost-only servers. Stop servers you started for checks.
-- No `git add/commit/reset/clean/stash/push` or history edits unless the task requires it; the working tree is graded.
+- Git: `push` is blocked by the platform. Never `reset`, `rebase`, `commit --amend`, `clean`, or `stash`; they lose or hide work. Commit only when the human asks; git log, diff, and test runs are all collected.
+- Agent latency counts against the fixed 180 minutes: keep turns bounded, run independent work in parallel, and say how long something will take before starting it.
 - Never update or reinstall Codex. No global installs. No new dependency without the human's OK.
 - No computer-use or browser-automation tools; the human checks UI in the built-in browser.
 - No secrets in code or logs. If the app needs an API key, read it from an environment variable the platform provides (ask the human first); never hardcode or print it. Validate inputs at boundaries; no silent `except`.
 - Don't dump large files or datasets; use head/wc/rg or `python3 .kit/tools/profile.py`.
 - Stay within the agreed scope. Don't edit `.kit/` (except `.kit/runtime/`).
-- The task's own deliverable format overrides our templates.
+- The task README and the task's own rules override this file; its deliverable format overrides our templates.
 - If a slice exceeds ~30 min or 3 failed attempts, stop and propose a smaller scope.
 <!-- workbench:end -->

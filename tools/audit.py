@@ -173,7 +173,7 @@ def check_git(ws, is_git, entries):
     if len(entries) > 40:
         info("... %d more" % (len(entries) - 40))
     if staged:
-        emit("WARN", "스테이징된 변경 %d개 — git add를 쓴 것 같아요. 규칙상 git 쓰기 명령은 피하세요." % len(staged))
+        info("스테이징된 변경 %d개 (커밋하지 않으면 그대로 작업 트리에 남아요)" % len(staged))
     if deleted:
         emit("WARN", "삭제된 추적 파일: %s — 의도한 건가요?" % ", ".join(deleted[:5]))
     data_touched = [p for p in modified if os.path.splitext(p)[1].lower() in DATA_EXT]
@@ -184,10 +184,16 @@ def check_git(ws, is_git, entries):
         with open(base_file) as fh:
             base = fh.read().strip()
         _, head = run(["git", "rev-parse", "HEAD"], ws)
-        if base and head.strip() and head.strip() != base:
-            emit("WARN", "설치 이후 HEAD가 바뀌었어요 (%s → %s). commit/reset을 했는지 확인하세요." % (base[:8], head.strip()[:8]))
+        head = head.strip()
+        if base and head and head != base:
+            is_ancestor, _ = run(["git", "merge-base", "--is-ancestor", base, head], ws)
+            if is_ancestor == 0:
+                _, n = run(["git", "rev-list", "--count", "%s..%s" % (base, head)], ws)
+                emit("PASS", "설치 이후 커밋 %s개, 원래 이력은 그대로예요" % n.strip())
+            else:
+                emit("WARN", "설치 시점 커밋(%s)이 현재 이력에 없어요. reset/rebase/amend로 이력이 바뀌었는지 확인하세요." % base[:8])
         else:
-            emit("PASS", "HEAD가 설치 시점 그대로예요 (commit/reset 없음)")
+            emit("PASS", "이력 변화 없음 (설치 시점 HEAD 그대로)")
 
 
 def target_files(ws, is_git, entries):
