@@ -24,8 +24,9 @@ Goal, within about 15 minutes: (a) a brief the human can check against the READM
    - 답:
    ```
    This is the only time you write to DM_LOG.md; afterwards it belongs to the human.
-5. Draft `process/REQUIREMENTS.md` from `.kit/templates/REQUIREMENTS.md`: R-ids, Must/Should/Could, an acceptance check per R (a command or an observable result), the source (README section or DM). Mark unconfirmed items as 가정.
-6. Stop. Tell the human: DM_LOG.md를 에디터로 열고, 질문을 복사해 업무 담당자에게 보내고, 답을 `- 답:` 아래에 그대로 붙여넣은 뒤 "DM_LOG 반영해"라고 하세요.
+5. Extract every explicit format rule from the README (file names, paths, columns and their order, types, encoding, units, rounding, sort order, CLI or API shape) into Must requirements with exact acceptance checks. Automated graders may run hidden checks against exactly these.
+6. Draft `process/REQUIREMENTS.md` from `.kit/templates/REQUIREMENTS.md`: R-ids, Must/Should/Could, an acceptance check per R (a command or an observable result), the source (README section or DM). Mark unconfirmed items as 가정.
+7. Stop. Tell the human: DM_LOG.md를 에디터로 열고, 질문을 복사해 업무 담당자에게 보내고, 답을 `- 답:` 아래에 그대로 붙여넣은 뒤 "DM_LOG 반영해"라고 하세요.
 
 ## When the human says the DM answers are in
 1. Read process/DM_LOG.md (and any answers pasted in the chat). Record each under "DM 확인 사항" in process/NOTES.md: Q-id → answer, keeping exact numbers and rules. Flag unanswered or vague answers and suggest one follow-up question for each.

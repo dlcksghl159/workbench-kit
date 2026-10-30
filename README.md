@@ -34,6 +34,7 @@ sub-agent는 `gpt-6.1-sol`로 고정돼요. 시험 환경의 모델 이름이 �
 | 도구 | `tools/profile.py` | 데이터 요약 (토큰 안 씀) | — |
 | 도구 | `tools/audit.py` | 제출 전 점검 | — |
 | 도구 | `tools/trace.py` | 내 프롬프트·위임·토큰 사용 기록 요약 | — |
+| 도구 | `tools/sample.py` | 검산용 표본 뽑기 (결측·특수값·중복·극값·범주별) | — |
 
 기록은 R-id로 이어져요: DM 답변 → `process/REQUIREMENTS.md` (R1, R2…) → `process/specs/` → 테스트 이름 `test_R1_…` → `process/REPORT.md` 추적표 → 확인 문제 답변.
 

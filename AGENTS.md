@@ -21,6 +21,7 @@ If skills are not loaded, read `.kit/skills/<name>/SKILL.md`.
 ## Evidence and records
 - Read before editing; cite file:line. Never guess library APIs; check the installed version (`pip show`, `--help`, source).
 - `process/NOTES.md` is append-only: DM facts (exact numbers and rules), decisions (결정/근거/검증/한계), changed judgments (이전 → 새, 이유), error recoveries (증상 → 원인 → 수정 → 재검증), verification records (command → 1-3 line result).
+- The grade is about how the human directs AI. When the human decides, accepts, corrects, or rejects something, record it in NOTES with 결정자 and the human's reason in their own words. Never write a decision as the human's if the human did not make it.
 - R-ids tie everything together: specs, test names (`test_R2_...`), report rows. When one changes, update the others in the same step.
 - Every Must requirement needs an executed acceptance check (test or command), even for small changes; it is graded evidence.
 - The human runs the DM interview in the right-hand panel; you cannot see it. `process/DM_LOG.md` carries it: at kickoff you write the question list there once, then it belongs to the human (never edit it again, so the editor never conflicts). The human pastes answers verbatim under each question; when told, read it, then update NOTES and REQUIREMENTS. Never assume an answer that is not in DM_LOG or the chat.
