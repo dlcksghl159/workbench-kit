@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# Start Codex with GUI-automation tools turned off (Computer Use is not allowed in the exam).
+exec codex --disable computer_use --disable browser_use --disable browser_use_external "$@"
