@@ -5,6 +5,8 @@ description: "Exam start, before any code: read-only discovery, task brief, DM q
 
 # Kickoff: discover → DM questions → requirements draft
 
+Sources of truth: the README and task instructions define the goal, mandatory conditions, and deliverables. The business owner in the DM (a scenario agent playing the person with the problem) adds business context: why it matters, how they work, detailed rules, exceptions, priorities, definitions, and requirements the README leaves implicit. When a DM answer conflicts with the README, flag it to the human and ask for a confirming question instead of silently choosing.
+
 Goal, within about 15 minutes: (a) a brief the human can check against the README, (b) the questions only the business owner can answer, (c) a requirements draft the human will confirm. No code edits in this skill.
 
 ## Steps
