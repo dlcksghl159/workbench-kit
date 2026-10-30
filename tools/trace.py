@@ -80,6 +80,8 @@ def summarize(path, entries, full):
                         args = {}
                     detail = {k: args[k] for k in ("agent_type", "task_name", "fork_turns", "model", "reasoning_effort") if k in args}
                     task = next((args[k] for k in TASK_KEYS if isinstance(args.get(k), str)), "")
+                    if task.startswith("gAAAA"):
+                        task = "(내용 암호화됨)"
                     out["spawns"].append((clock(e.get("timestamp")), detail, clip(task, full, 160)))
         elif e.get("type") == "event_msg" and payload.get("type") == "token_count":
             usage = (payload.get("info") or {}).get("total_token_usage")

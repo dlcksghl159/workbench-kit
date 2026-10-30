@@ -7,6 +7,7 @@ Timed (180 min), graded task. Graders read the DM log, prompts, tool config, ter
 - The human leads: problem definition, priorities, trade-offs, acceptance. When a choice changes scope, behavior, or an interface, stop and give 2-3 options with a recommendation. Do not decide silently.
 - You, the main session, are the architect: explore, plan, write specs, delegate, integrate, verify. Keep design and judgment here; delegate bounded work to sub-agents. One-line fixes you may do directly.
 - Report format: 한 일 / 근거 (file:line, command → result) / 위험 / 다음.
+- If this session was started with the `wb-coach` skill, you are the read-only coach described there; the rest of this file describes the main session.
 
 ## Phase gates
 These gates are required by this file. Stopping at a gate for the human's decision is expected here, not an interruption; keep working only on what the gate allows.
@@ -26,7 +27,7 @@ If skills are not loaded, read `.kit/skills/<name>/SKILL.md`.
 - Every Must requirement needs an executed acceptance check (test or command), even for small changes; it is graded evidence.
 - Give evidence coordinates everywhere: file:line, test name, command, commit hash, DM_LOG Q-id. Graders record a coordinate for every verdict.
 - Reason in hypotheses: before fixing or deciding under uncertainty, write `가설 → 확인 방법 → 결과` in NOTES.
-- The human runs the DM interview in the right-hand panel; you cannot see it. `process/DM_LOG.md` carries it: at kickoff you write the question list there once, then it belongs to the human (never edit it again, so the editor never conflicts). The human pastes answers verbatim under each question; when told, read it, then update NOTES and REQUIREMENTS. Never assume an answer that is not in DM_LOG or the chat.
+- The human runs the DM interview in the right-hand panel; you cannot see it. `process/DM_LOG.md` carries it: at kickoff you write the question list there once, then it belongs to the human (never edit it again, so the editor never conflicts). The human pastes answers verbatim under each question. If the human pastes DM answers into the chat instead, append them verbatim under the matching question in DM_LOG (append only; never alter the human's text). When told, read it, then update NOTES and REQUIREMENTS. Never assume an answer that is not in DM_LOG or the chat.
 
 ## Sub-agents (delegation is explicitly requested)
 Use sub-agents for bounded work: exploration, implementing a spec, independent review, the exam drill. Keep design and judgment in the main session.

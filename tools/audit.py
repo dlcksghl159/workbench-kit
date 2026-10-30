@@ -119,8 +119,17 @@ def git_changes(ws):
     code, _ = run(["git", "rev-parse", "--is-inside-work-tree"], ws)
     if code != 0:
         return False, []
-    code, out = run(["git", "status", "--porcelain=v1", "-uall"], ws)
+    base_file = os.path.join(ws, ".kit", "runtime", "BASE_HEAD")
+    base = open(base_file).read().strip() if os.path.isfile(base_file) else ""
     entries = []
+    if base:
+        # Committed and uncommitted changes since install count as the submission's changes.
+        _, diff = run(["git", "diff", "--name-status", base], ws)
+        for line in diff.splitlines():
+            parts = line.split("\t")
+            if len(parts) >= 2 and not parts[-1].startswith(".kit/"):
+                entries.append((parts[0][0] + " ", parts[-1]))
+    code, out = run(["git", "status", "--porcelain=v1", "-uall"], ws)
     for line in out.splitlines():
         if len(line) < 4:
             continue
@@ -130,7 +139,8 @@ def git_changes(ws):
         path = path.strip('"')
         if path.startswith(".kit/") or path == ".kit" or "__pycache__/" in path or path.endswith(".pyc"):
             continue
-        entries.append((status, path))
+        if status == "??" or not any(p == path for _, p in entries):
+            entries.append((status, path))
     return True, entries
 
 
