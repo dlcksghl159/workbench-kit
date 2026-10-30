@@ -19,5 +19,5 @@ description: "Last 30-40 min before submitting: reviewer pass, fixes, audit, REP
    If the task demands its own report format, fill that format and keep ours as an appendix or skip it.
 6. Make sure the README (or the report) has run instructions that work from a clean shell.
 7. Spawn `wb-grader`. Show the human its scores, claims without evidence, and top fixes. Fix what fits in the remaining time by doing the real work (run the check, then record it); never add a claim that was not executed.
-8. Spawn `wb-examiner`. Tell the human to read .kit/runtime/QA_DRILL.md and re-check the listed facts in the code themselves.
+8. Spawn `wb-examiner` (refresh it if it already ran). Tell the human to read parts A and B of .kit/runtime/QA_DRILL.md, then offer a 10-minute drill: ask the scenario questions one at a time without showing answers, and after each reply say only what was right and what was missing.
 9. Remind the human: every editor tab saved (저장됨), demo server state as intended, then submit.
