@@ -16,7 +16,7 @@ description: "After requirements are confirmed: write process/specs/S<n>-<name>.
 2. Spawn `wb-worker` with "Implement process/specs/S<n>-<name>.md". Do not restate the spec in the message.
 3. When it returns: read its report, then `git diff --stat` and the diff of the in-scope files. Rerun at least one check yourself.
 4. Decide: accept, fix forward with a new small spec, or undo the slice by restoring the in-scope files by hand (never git reset).
-5. Record in process/NOTES.md: the slice result, check commands with 1-3 line results, any changed judgment or error recovery.
+5. Record in process/NOTES.md: the slice result, check commands with 1-3 line results, any changed judgment or error recovery. Then commit (main session only): `S<n> R<ids>: <what> (checks: <result>)`, and put the hash in NOTES.
 6. If the slice changed something visible, tell the human exactly what to check in the built-in browser or the output file.
 
 ## Fallback without multi-agent

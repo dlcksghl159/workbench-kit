@@ -24,6 +24,8 @@ If skills are not loaded, read `.kit/skills/<name>/SKILL.md`.
 - The grade is about how the human directs AI. When the human decides, accepts, corrects, or rejects something, record it in NOTES with 결정자 and the human's reason in their own words. Never write a decision as the human's if the human did not make it.
 - R-ids tie everything together: specs, test names (`test_R2_...`), report rows. When one changes, update the others in the same step.
 - Every Must requirement needs an executed acceptance check (test or command), even for small changes; it is graded evidence.
+- Give evidence coordinates everywhere: file:line, test name, command, commit hash, DM_LOG Q-id. Graders record a coordinate for every verdict.
+- Reason in hypotheses: before fixing or deciding under uncertainty, write `가설 → 확인 방법 → 결과` in NOTES.
 - The human runs the DM interview in the right-hand panel; you cannot see it. `process/DM_LOG.md` carries it: at kickoff you write the question list there once, then it belongs to the human (never edit it again, so the editor never conflicts). The human pastes answers verbatim under each question; when told, read it, then update NOTES and REQUIREMENTS. Never assume an answer that is not in DM_LOG or the chat.
 
 ## Sub-agents (delegation is explicitly requested)
@@ -40,7 +42,7 @@ Without multi-agent support, the human runs the role in a second terminal (`.kit
 
 ## Hard rules
 - Web servers bind 0.0.0.0; the built-in browser preview cannot reach localhost-only servers. Stop servers you started for checks.
-- Git: `push` is blocked by the platform. Never `reset`, `rebase`, `commit --amend`, `clean`, or `stash`; they lose or hide work. Commit only when the human asks; git log, diff, and test runs are all collected.
+- Git: graders read commits and match documents against code and commits. When a slice's checks pass, the main session (never a sub-agent) commits it as `S<n> R<ids>: <what> (checks: <result>)` unless the human said otherwise. `push` is blocked. Never `reset`, `rebase`, `commit --amend`, `clean`, or `stash`.
 - Agent latency counts against the fixed 180 minutes: keep turns bounded, run independent work in parallel, and say how long something will take before starting it.
 - Never update or reinstall Codex. No global installs. No new dependency without the human's OK.
 - No computer-use or browser-automation tools; the human checks UI in the built-in browser.

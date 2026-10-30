@@ -70,7 +70,7 @@ sub-agent는 `gpt-6.1-sol`로 고정돼요. 시험 환경의 모델 이름이 �
 - **제출 미리보기에 `.kit` 같은 숨김 폴더가 안 보일 수 있어요.** 정상이에요. 최종 화면에서 제출 ID·파일 수를 확인해요.
 
 ## 카드
-[행동 전략](cards/play.md) · [Codex 능력 지도](cards/codex.md) · [평가 기준 지도](cards/rubric.md) · [DM 카드](cards/dm.md) · [프롬프트 카드](cards/prompts.md) · [확인 문제 카드](cards/qa.md)
+[행동 전략](cards/play.md) · [스택 카드](cards/stack.md) · [Codex 능력 지도](cards/codex.md) · [평가 기준 지도](cards/rubric.md) · [DM 카드](cards/dm.md) · [프롬프트 카드](cards/prompts.md) · [확인 문제 카드](cards/qa.md)
 
 ## sub-agent 기능이 안 될 때
 두 번째 터미널에서 `.kit/cx`를 실행하고 이렇게 보내요.

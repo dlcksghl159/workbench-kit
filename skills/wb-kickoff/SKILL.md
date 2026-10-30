@@ -15,7 +15,8 @@ Goal, within about 15 minutes: (a) a brief the human can check against the READM
    - Data files: `python3 .kit/tools/profile.py <file-or-dir>`.
    - Existing tests: run them once (`python3 -m pytest -q`, `npm test`, ...) and record pass/fail counts as the baseline in process/NOTES.md.
    - If both code and data exist, spawn `wb-explorer` agents in parallel for each.
-2. Brief, 15 lines max: who the user is and what they need; inputs; required deliverables and their format; constraints already stated; how the result will likely be judged.
+   - Baseline sweep of the provided code: `python3 .kit/tools/audit.py --all` plus an explorer pass for existing bugs and security smells (hardcoded secrets, injection, unsafe file paths, localhost-only binding). List them; the human decides which are in scope.
+2. Core problem in one sentence (what must be true for the user to be satisfied), then the brief, 15 lines max: who the user is and what they need; inputs; required deliverables and their format; constraints already stated; how the result will likely be judged.
 3. Gaps the README leaves open. Check at least: what one row or record means; duplicates, cancellations, and missing values; time windows and timezones; units and rounding; exact definitions or formulas of domain terms (yield, defect rate, Cpk, ...); which rule wins when rules conflict; output format and naming; the one action the user must be able to do; behavior on invalid input; performance limits.
 4. DM questions: 5-8 in Korean, one fact each, ordered by impact on the design. Ask for facts, rules, examples, and priorities. Never ask the owner what to do or how to implement. Include at least one example-based question ("이 케이스는 X로 처리하면 맞나요?"). Append them to the end of `process/DM_LOG.md`, one block per question:
    ```

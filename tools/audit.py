@@ -35,6 +35,7 @@ LOCAL_BIND = (
     re.compile(r"""--host[ =]["']?(127\.0\.0\.1|localhost)\b"""),
     re.compile(r"""\.listen\(\s*\d+\s*,\s*["'](127\.0\.0\.1|localhost)["']"""),
     re.compile(r"""server\.address\s*=\s*["']?(127\.0\.0\.1|localhost)"""),
+    re.compile(r"""\(\s*["'](127\.0\.0\.1|localhost)["']\s*,\s*\d{2,5}\s*\)"""),
 )
 RUN_WITHOUT_HOST = re.compile(r"\b(app\.run|uvicorn\.run)\((?![^)]*\bhost\b)[^)]*\)")
 LEFTOVER = re.compile(r"\bbreakpoint\(\)|\bpdb\.set_trace\(\)|^\s*debugger;", re.MULTILINE)
@@ -127,7 +128,7 @@ def git_changes(ws):
         if " -> " in path:
             path = path.split(" -> ", 1)[1]
         path = path.strip('"')
-        if path.startswith(".kit/") or path == ".kit":
+        if path.startswith(".kit/") or path == ".kit" or "__pycache__/" in path or path.endswith(".pyc"):
             continue
         entries.append((status, path))
     return True, entries
@@ -400,12 +401,15 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("workspace", nargs="?", default=".")
     parser.add_argument("--run-tests", action="store_true", help="run pytest/unittest or npm test")
+    parser.add_argument("--all", action="store_true", help="scan every file, not only changed ones (baseline sweep of provided code)")
     args = parser.parse_args()
     ws = os.path.abspath(args.workspace)
     print("audit: %s" % ws)
     is_git, entries = git_changes(ws)
     check_git(ws, is_git, entries)
-    files = target_files(ws, is_git, entries)
+    files = list(walk_files(ws)) if args.all else target_files(ws, is_git, entries)
+    if args.all:
+        print("(--all: 제공된 코드 전체를 검사합니다)")
     check_content(ws, files)
     check_syntax(ws, files)
     tests = check_docs(ws)
