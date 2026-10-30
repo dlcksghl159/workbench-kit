@@ -34,6 +34,7 @@ Use sub-agents for bounded work: exploration, implementing a spec, independent r
 - `wb-worker` — implements exactly one spec file, runs its checks, reports.
 - `wb-reviewer` — adversarial review against REQUIREMENTS; edits nothing.
 - `wb-examiner` — predicts the post-task questions and drafts grounded answers.
+- `wb-grader` — mock evaluator: scores the evidence against the published criteria and lists the cheapest fixes; edits nothing but .kit/runtime/GRADE.md. Run it after the first end-to-end slice and again before submitting.
 Without multi-agent support, the human runs the role in a second terminal (`.kit/cx`).
 
 ## Hard rules

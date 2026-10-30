@@ -15,7 +15,7 @@ Codex가 무엇을 어디까지 하는지는 [Codex 능력 지도](cards/codex.m
 
 install.sh가 하는 일:
 - `~/.codex/AGENTS.md`에 규칙 블록 추가 (기존 내용은 백업하고 유지)
-- sub-agent 4개, skill 5개를 `~/.codex/`에 설치
+- sub-agent 5개, skill 5개를 `~/.codex/`에 설치
 - `process/`에 REQUIREMENTS·NOTES·HANDOFF·DM_LOG 생성, `.kit/`는 git status/diff에서 제외
 - Codex 설정 파일(config.toml)은 건드리지 않음
 
@@ -29,9 +29,11 @@ sub-agent는 `gpt-6.1-sol`로 고정돼요. 시험 환경의 모델 이름이 �
 | sub-agent | wb-worker | 스펙 1개 구현 + 검증 | high |
 | sub-agent | wb-reviewer | 새 맥락에서 깐깐한 리뷰 (수정 안 함) | max |
 | sub-agent | wb-examiner | 확인 문제 예상 질문과 4문장 답 | high |
+| sub-agent | wb-grader | 모의 채점: 공개된 평가 기준으로 증거 채점, 보완점 | high |
 | skill | wb-kickoff · wb-slice · wb-verify · wb-handoff · wb-finish | 단계별 절차 | — |
 | 도구 | `tools/profile.py` | 데이터 요약 (토큰 안 씀) | — |
 | 도구 | `tools/audit.py` | 제출 전 점검 | — |
+| 도구 | `tools/trace.py` | 내 프롬프트·위임·토큰 사용 기록 요약 | — |
 
 기록은 R-id로 이어져요: DM 답변 → `process/REQUIREMENTS.md` (R1, R2…) → `process/specs/` → 테스트 이름 `test_R1_…` → `process/REPORT.md` 추적표 → 확인 문제 답변.
 
@@ -45,6 +47,7 @@ sub-agent는 `gpt-6.1-sol`로 고정돼요. 시험 환경의 모델 이름이 �
 | 10:20 | DM | `process/DM_LOG.md`의 질문을 업무 담당자에게 보내고 답을 그대로 붙여넣기 ([DM 카드](cards/dm.md)) → P1 → 합의 확인 |
 | 10:40 | PLAN | P2, slice 계획 확인 |
 | 10:50 | BUILD | P3 반복. 11:35까지 처음부터 끝까지 한 번 돌아가게 |
+| 11:40 | 중간 점검 | P6.5: wb-grader 모의 채점 → 부족한 증거 보완 |
 | 12:15 | FINISH | P7: 리뷰, 수정, 점검, 보고서 |
 | 12:40 | 대비 | P8: 예상 질문 읽기, 코드에서 사실 다시 확인 |
 | 12:50 | 제출 | 작업 종료 10분 전 제출 시작 (가이드 권장): 저장 확인 → "제출하고 문제풀기" → "제출물 확정하고 문제풀기" |
@@ -66,7 +69,7 @@ sub-agent는 `gpt-6.1-sol`로 고정돼요. 시험 환경의 모델 이름이 �
 - **제출 미리보기에 `.kit` 같은 숨김 폴더가 안 보일 수 있어요.** 정상이에요. 최종 화면에서 제출 ID·파일 수를 확인해요.
 
 ## 카드
-[Codex 능력 지도](cards/codex.md) · [DM 카드](cards/dm.md) · [프롬프트 카드](cards/prompts.md) · [확인 문제 카드](cards/qa.md)
+[Codex 능력 지도](cards/codex.md) · [평가 기준 지도](cards/rubric.md) · [DM 카드](cards/dm.md) · [프롬프트 카드](cards/prompts.md) · [확인 문제 카드](cards/qa.md)
 
 ## sub-agent 기능이 안 될 때
 두 번째 터미널에서 `.kit/cx`를 실행하고 이렇게 보내요.
