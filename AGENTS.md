@@ -23,7 +23,7 @@ If skills are not loaded, read `.kit/skills/<name>/SKILL.md`.
 - `process/NOTES.md` is append-only: DM facts (exact numbers and rules), decisions (결정/근거/검증/한계), changed judgments (이전 → 새, 이유), error recoveries (증상 → 원인 → 수정 → 재검증), verification records (command → 1-3 line result).
 - R-ids tie everything together: specs, test names (`test_R2_...`), report rows. When one changes, update the others in the same step.
 - Every Must requirement needs an executed acceptance check (test or command), even for small changes; it is graded evidence.
-- The human runs the DM interview in the right-hand panel; you cannot see it. Ask the human for answers instead of assuming.
+- The human runs the DM interview in the right-hand panel; you cannot see it. `process/DM_LOG.md` carries it: at kickoff you write the question list there once, then it belongs to the human (never edit it again, so the editor never conflicts). The human pastes answers verbatim under each question; when told, read it, then update NOTES and REQUIREMENTS. Never assume an answer that is not in DM_LOG or the chat.
 
 ## Sub-agents (delegation is explicitly requested)
 Use sub-agents for bounded work: exploration, implementing a spec, independent review, the exam drill. Keep design and judgment in the main session.

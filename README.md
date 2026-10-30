@@ -16,7 +16,7 @@ Codex가 무엇을 어디까지 하는지는 [Codex 능력 지도](cards/codex.m
 install.sh가 하는 일:
 - `~/.codex/AGENTS.md`에 규칙 블록 추가 (기존 내용은 백업하고 유지)
 - sub-agent 4개, skill 5개를 `~/.codex/`에 설치
-- `process/`에 REQUIREMENTS·NOTES·HANDOFF 생성, `.kit/`는 git status/diff에서 제외
+- `process/`에 REQUIREMENTS·NOTES·HANDOFF·DM_LOG 생성, `.kit/`는 git status/diff에서 제외
 - Codex 설정 파일(config.toml)은 건드리지 않음
 
 sub-agent는 `gpt-6.1-sol`로 고정돼요. 시험 환경의 모델 이름이 다르면 `KIT_MODEL=<모델명> bash .kit/install.sh`로 다시 설치하고, 세션 모델을 그대로 따르게 하려면 `KIT_MODEL=none`.
@@ -42,7 +42,7 @@ sub-agent는 `gpt-6.1-sol`로 고정돼요. 시험 환경의 모델 이름이 �
 | 10:00 | 과제 시작 | "과제 시작" → 녹화 시작 → 휴대폰 거치 → 신분증·안경 확인 (이 시간도 180분에 포함) |
 | 10:05 | 준비 | 키트 설치, Codex 실행·설정, README 읽기, [P0](cards/prompts.md) |
 | 10:15 | DISCOVER | kickoff 결과 확인, DM 질문 다듬기 |
-| 10:20 | DM | 업무 담당자 인터뷰 ([DM 카드](cards/dm.md)), P1, 합의 확인 |
+| 10:20 | DM | `process/DM_LOG.md`의 질문을 업무 담당자에게 보내고 답을 그대로 붙여넣기 ([DM 카드](cards/dm.md)) → P1 → 합의 확인 |
 | 10:40 | PLAN | P2, slice 계획 확인 |
 | 10:50 | BUILD | P3 반복. 11:35까지 처음부터 끝까지 한 번 돌아가게 |
 | 12:15 | FINISH | P7: 리뷰, 수정, 점검, 보고서 |

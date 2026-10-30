@@ -54,7 +54,7 @@ done
 
 echo "[4/5] workspace files"
 mkdir -p "$WS/process/specs" "$KIT/runtime"
-for t in REQUIREMENTS NOTES HANDOFF; do
+for t in REQUIREMENTS NOTES HANDOFF DM_LOG; do
   if [ -f "$WS/process/$t.md" ]; then
     echo "  process/$t.md exists, kept"
   else
