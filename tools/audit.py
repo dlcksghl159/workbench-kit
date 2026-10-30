@@ -174,10 +174,11 @@ def check_git(ws, is_git, entries):
     if not entries:
         emit("WARN", "변경된 파일이 없어요 (.kit 제외). 정말 제출할 게 맞나요?")
         return
-    staged = [p for s, p in entries if s[0] not in " ?"]
+    _, cached = run(["git", "diff", "--cached", "--name-only"], ws)
+    staged = [p for p in cached.splitlines() if p and not p.startswith(".kit/")]
     deleted = [p for s, p in entries if "D" in s]
-    untracked = [p for s, p in entries if s == "??"]
-    modified = [p for s, p in entries if s != "??" and "D" not in s]
+    untracked = [p for s, p in entries if s == "??" or s.startswith("A")]
+    modified = [p for s, p in entries if s != "??" and not s.startswith("A") and "D" not in s]
     emit("PASS", "변경 %d개 (수정 %d, 새 파일 %d, 삭제 %d)" % (len(entries), len(modified), len(untracked), len(deleted)))
     for status, path in entries[:40]:
         info("%s %s" % (status, path))
