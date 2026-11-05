@@ -9,6 +9,7 @@ description: "After requirements are confirmed: write process/specs/S<n>-<name>.
 - Order slices Must-first. Slice 1 must run end to end (input → processing → output), even if thin.
 - Each slice covers one user action and one success criterion. After its automated checks pass, have the human try it in the real interface (built-in browser or the output file) before starting the next slice.
 - Each slice is about 30 minutes of work or less and touches few files. Write the plan under "작업 계획" in process/NOTES.md with the R-ids each slice covers.
+- If the task has core logic with a quality metric (cost, distance, time, coverage, accuracy, fairness), build the simplest baseline first and record its metric with the command that measured it. Each later improvement records before → after with the same command under "설계 기록" in NOTES. These numbers are what the human quotes when asked why the method works.
 - Pre-mortem: list the 3-5 most likely ways the final result could be wrong. Each one becomes a check in some slice.
 - Show the plan to the human before starting slice 1.
 
@@ -16,7 +17,7 @@ description: "After requirements are confirmed: write process/specs/S<n>-<name>.
 1. Write `process/specs/S<n>-<name>.md` from `.kit/templates/SPEC.md`. Required: goal, R-ids, files in scope (exact paths), conditions copied from DM facts, forbidden list, checks (exact commands with the expected result), done criteria.
 2. Spawn `wb-worker` with "Implement process/specs/S<n>-<name>.md". Do not restate the spec in the message.
 3. When it returns: read its report, then `git diff --stat` and the diff of the in-scope files. Rerun at least one check yourself.
-4. Decide: accept, fix forward with a new small spec, or undo the slice by restoring the in-scope files by hand (never git reset).
+4. Show the human the result with the evidence and end with `판정 요청 J<n>`. The human decides: accept, fix forward with a new small spec, or undo the slice by restoring the in-scope files by hand (never git reset). Record the verdict under "AI 결과 판정" with the human's reason verbatim; when the human splits it (keep A, fix B, drop C), record each part with its check.
 5. Record in process/NOTES.md: the slice result, check commands with 1-3 line results, any changed judgment or error recovery. Then commit (main session only): `S<n> R<ids>: <what> (checks: <result>)`, and put the hash in NOTES.
 6. If the slice changed something visible, tell the human exactly what to check in the built-in browser or the output file.
 

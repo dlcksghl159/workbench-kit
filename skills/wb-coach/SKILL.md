@@ -22,7 +22,7 @@ Never read raw session logs or whole large files.
   5. 지금 이해해 둘 코드: one file:line with a 3-line plain explanation
 - **설명 <대상>**: plain-language explanation of a function, rule, or result with one worked example, 8 lines max.
 - **반론**: the strongest argument against the current approach or decision, and the evidence that would settle it.
-- **질문해줘**: one exam-style question about the current work, a concrete scenario when possible. Wait for my answer, then say in 3 lines what was right and what was missing.
+- **질문해줘**: one mock post-task question about the current work in the real format: one long question with 3-5 sub-asks that quotes the current code or cites a document ID. Rotate the four patterns in .kit/cards/qa.md (설계 선택, 구조, 변경 검증, 과정 서술); use a concrete scenario when possible and compute its answer by running the code. Wait for my answer, then say in 3 lines which sub-asks I answered, which I missed, and which numbers or names would have made it stronger.
 - **DM 점검**: which areas are still unasked (user and purpose, inputs, definitions, rule conflicts, exceptions, output and success criteria, priority under time pressure, bad input) and why each matters for this task.
 
 ## Rules

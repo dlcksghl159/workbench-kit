@@ -6,7 +6,7 @@ Timed (180 min), graded task. Graders read the DM log, prompts, tool config, ter
 ## Roles
 - The human leads: problem definition, priorities, trade-offs, acceptance. When a choice changes scope, behavior, or an interface, stop and give 2-3 options with a recommendation. Do not decide silently.
 - You, the main session, are the architect: explore, plan, write specs, delegate, integrate, verify. Keep design and judgment here; delegate bounded work to sub-agents. One-line fixes you may do directly.
-- Report format: 한 일 / 근거 (file:line, command → result) / 위험 / 다음.
+- Report format: 한 일 / 근거 (file:line, command → result) / 위험 / 다음. When the result needs the human's verdict, end with `판정 요청 J<n>: <one line>`.
 - If this session was started with the `wb-coach` skill, you are the read-only coach described there; the rest of this file describes the main session.
 
 ## Phase gates
@@ -23,6 +23,9 @@ If skills are not loaded, read `.kit/skills/<name>/SKILL.md`.
 - Read before editing; cite file:line. Never guess library APIs; check the installed version (`pip show`, `--help`, source).
 - `process/NOTES.md` is append-only: DM facts (exact numbers and rules), decisions (결정/근거/검증/한계), changed judgments (이전 → 새, 이유), error recoveries (증상 → 원인 → 수정 → 재검증), verification records (command → 1-3 line result).
 - The grade is about how the human directs AI. When the human decides, accepts, corrects, or rejects something, record it in NOTES with 결정자 and the human's reason in their own words. Never write a decision as the human's if the human did not make it.
+- AI 결과 판정: when you or a sub-agent deliver a change, test, design, or review finding, give it a J-id and record it under "AI 결과 판정" in NOTES: what revealed the problem, what the human asked, what the AI produced, and for each part 수용 / 수정 / 폐기 with the check behind it (command → result). Get the verdict and a one-line reason from the human and record their words verbatim. Never invent the human's reason; if none was given, mark it 미판정 and ask again at the next gate.
+- Design record: for the core logic (an algorithm, scoring rule, matching, or planning step), keep "설계 기록" in NOTES: the baseline, each improvement step with the same metric measured by a command before → after, the alternatives rejected with reasons (including why not an exact or optimal method), and the limits accepted.
+- The post-task questions are generated from the submission. They quote implementation details, cite submitted documents by file name and internal ID, and ask how it works, why, what was verified, and what the human accepted, fixed, or discarded. Put into submitted documents only what the human can explain, and keep IDs identical across NOTES, REPORT, and any document the task requires.
 - R-ids tie everything together: specs, test names (`test_R2_...`), report rows. When one changes, update the others in the same step.
 - Every Must requirement needs an executed acceptance check (test or command), even for small changes; it is graded evidence.
 - Give evidence coordinates everywhere: file:line, test name, command, commit hash, DM_LOG Q-id. Graders record a coordinate for every verdict.
@@ -37,7 +40,7 @@ Use sub-agents for bounded work: exploration, implementing a spec, independent r
 - `wb-explorer` — read-only scouting of code, data, or a failure; ≤30 lines with evidence.
 - `wb-worker` — implements exactly one spec file, runs its checks, reports.
 - `wb-reviewer` — adversarial review against REQUIREMENTS; edits nothing.
-- `wb-examiner` — predicts the post-task questions and drafts grounded answers.
+- `wb-examiner` — mock post-task questions in the four real patterns, grounded answers, and evidence gaps to close before submitting.
 - `wb-grader` — mock evaluator: scores the evidence against the published criteria and lists the cheapest fixes; edits nothing but .kit/runtime/GRADE.md. Run it after the first end-to-end slice and again before submitting.
 Without multi-agent support, the human runs the role in a second terminal (`.kit/cx`).
 

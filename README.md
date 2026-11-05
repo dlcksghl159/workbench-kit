@@ -28,7 +28,7 @@ sub-agent는 `gpt-6.1-sol`로 고정돼요. 시험 환경의 모델 이름이 �
 | sub-agent | wb-explorer | 코드·데이터·오류 원인 탐색 (읽기 전용) | high |
 | sub-agent | wb-worker | 스펙 1개 구현 + 검증 | high |
 | sub-agent | wb-reviewer | 새 맥락에서 깐깐한 리뷰 (수정 안 함) | max |
-| sub-agent | wb-examiner | 확인 문제 예상 질문과 4문장 답 | high |
+| sub-agent | wb-examiner | 실제 4유형 모의 확인 문제 6개, 구조 지도, 증거 공백 | high |
 | sub-agent | wb-grader | 모의 채점: 공개된 평가 기준으로 증거 채점, 보완점 | high |
 | skill | wb-kickoff · wb-slice · wb-verify · wb-handoff · wb-finish | 단계별 절차 | — |
 | 도구 | `tools/profile.py` | 데이터 요약 (토큰 안 씀) | — |
@@ -55,9 +55,9 @@ sub-agent는 `gpt-6.1-sol`로 고정돼요. 시험 환경의 모델 이름이 �
 | 10:20 | DM | `process/DM_LOG.md`의 질문을 업무 담당자에게 보내고 답을 그대로 붙여넣기 ([DM 카드](cards/dm.md)) → P1 → 합의 확인 |
 | 10:40 | PLAN | P2, slice 계획 확인 |
 | 10:50 | BUILD | P3 반복. 11:35까지 처음부터 끝까지 한 번 돌아가게 |
-| 11:40 | 중간 점검 | P6.5 모의 채점 + P8 예상 문제 1차 (둘 다 sub-agent라 병렬) → 부족한 증거 보완, 규칙 한 장 읽기 |
+| 11:40 | 중간 점검 | P6.5 모의 채점 + P8 모의 확인 문제 1차 (둘 다 sub-agent라 병렬) → 증거 공백 보완, 규칙 한 장·구조 지도 읽기 |
 | 12:15 | FINISH | P7: 리뷰, 수정, 점검, 보고서 |
-| 12:40 | 대비 | P8 갱신 → P8.5 드릴 10분 → 최종 diff 직접 읽기 |
+| 12:40 | 대비 | P8 갱신 → P8.5 드릴 10분 (2문제를 5분씩 직접 쳐서) → 최종 diff 직접 읽기 |
 | 12:50 | 제출 | 작업 종료 10분 전 제출 시작 (가이드 권장): 저장 확인 → "제출하고 문제풀기" → "제출물 확정하고 문제풀기" |
 | ~13:00 | 확인 문제 | 문제 준비 대기 (최대 10분) → "문제 풀기" → 6문항 × 5분 ([카드](cards/qa.md)) |
 
